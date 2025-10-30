@@ -1,0 +1,486 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WBX - Web3 Crypto Exchange</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00d2ff;
+        }
+
+        .connect-wallet {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .connect-wallet:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 5% 80px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ffffff, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 5%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(90deg, #ffffff, #00d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00d2ff;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #00d2ff;
+        }
+
+        /* Trading Pairs */
+        .trading {
+            padding: 80px 5%;
+        }
+
+        .trading-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgba(0, 210, 255, 0.1);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #00d2ff;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pair {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pair img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        .change.positive {
+            color: #00ff88;
+        }
+
+        .change.negative {
+            color: #ff4444;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 5% 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            color: #00d2ff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-column ul li:hover {
+            opacity: 1;
+            color: #00d2ff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">WBX</div>
+            <ul class="nav-links">
+                <li><a href="#trade">Trade</a></li>
+                <li><a href="#markets">Markets</a></li>
+                <li><a href="#earn">Earn</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+            <a href="#" class="connect-wallet">Connect Wallet</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>WBX Web3 Exchange</h1>
+        <p>The next-generation decentralized cryptocurrency exchange built for speed, security, and seamless Web3 integration.</p>
+        
+        <div class="cta-buttons">
+            <button class="btn btn-primary">Start Trading</button>
+            <button class="btn btn-secondary">Learn More</button>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose WBX?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🔐</span>
+                    <h3>Non-Custodial</h3>
+                    <p>You control your keys and funds. Trade directly from your wallet with full ownership.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Lightning Fast</h3>
+                    <p>Experience instant trade execution with ultra-low latency on our optimized Layer 2 network.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💰</span>
+                    <h3>Lowest Fees</h3>
+                    <p>Enjoy gas-free trading and minimal protocol fees. Keep more of your profits.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3>Cross-Chain</h3>
+                    <p>Trade across Ethereum, BSC, Polygon, Arbitrum, and more with seamless bridging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trading Pairs -->
+    <section class="trading" id="markets">
+        <div class="container">
+            <h2 class="section-title">Popular Trading Pairs</h2>
+            
+            <div class="trading-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pair</th>
+                            <th>Last Price</th>
+                            <th>24h Change</th>
+                            <th>24h Volume</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="pair">
+                                    <img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" alt="ETH">
+                                    <span>ETH/USDT</span>
+                                </div>
+                            </td>
+                            <td>$2,645.32</td>
+                            <td class="change positive">+2.34%</td>
+                            <td>$124.5M</td>
+                            <td><button class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="pair">
+                                    <img src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png" alt="BTC">
+                                    <span>BTC/USDT</span>
+                                </div>
+                            </td>
+                            <td>$68,421.00</td>
+                            <td class="change positive">+1.87%</td>
+                            <td>$98.2M</td>
+                            <td><button class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="pair">
+                                    <img src="https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png" alt="BNB">
+                                    <span>BNB/USDT</span>
+                                </div>
+                            </td>
+                            <td>$582.45</td>
+                            <td class="change negative">-0.45%</td>
+                            <td>$45.8M</td>
+                            <td><button class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Trade</button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="pair">
+                                    <img src="https://assets.coingecko.com/coins/images/4128/small/solana.png" alt="SOL">
+                                    <span>SOL/USDT</span>
+                                </div>
+                            </td>
+                            <td>$168.92</td>
+                            <td class="change positive">+5.67%</td>
+                            <td>$78.3M</td>
+                            <td><button class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.9rem;">Trade</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WBX</h3>
+                    <p>The future of decentralized trading. Secure, fast, and truly non-custodial.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Spot Trading</a></li>
+                        <li><a href="#">Perpetual Futures</a></li>
+                        <li><a href="#">Liquidity Pools</a></li>
+                        <li><a href="#">WBX Token</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">API Docs</a></li>
+                        <li><a href="#">Fee Schedule</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WBX. All rights reserved. | Decentralized & Non-Custodial</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
